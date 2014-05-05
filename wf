@@ -1,0 +1,20 @@
+#!/bin/bash
+
+INTERFACE=$(networksetup -listallhardwareports | awk '$3=="Wi-Fi" {getline; print $2}')
+
+if [ $# -eq 0 ]; then
+	networksetup -setairportpower $INTERFACE off;
+	echo "Wi-Fi reset.";
+	sleep 1;
+	networksetup -setairportpower $INTERFACE on;
+fi
+case "$1" in
+-off) networksetup -setairportpower $INTERFACE off;
+	echo "Wi-Fi off";
+	exit;
+;;
+-on) networksetup -setairportpower $INTERFACE on;
+	echo "Wi-Fi on";
+	exit;
+;;
+esac
