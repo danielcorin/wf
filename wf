@@ -1,6 +1,6 @@
 #!/bin/bash
 
-oneline_usage="wf [-on | -off | -d]"
+oneline_usage="wf [-on | -off | -d | -h]"
 
 INTERFACE=$(networksetup -listallhardwareports | awk '$3=="Wi-Fi" {getline; print $2}')
 
@@ -27,11 +27,11 @@ function help {
 
 		Options:
 		  $ON
-		      Turns WiFi on.
+		      Turns Wi-Fi on.
 		  $OFF
-		      Turns WiFi off.
+		      Turns Wi-Fi off.
 		  $DELAY [delay_length]
-		      Turns WiFi off, waits 'delay' seconds, then turns WiFi on.
+		      Turns Wi-Fi off, waits 'delay' seconds, then turns Wi-Fi on.
 		      Default delay_length is 1 second.
 		  $HELP
 		      Displays script help.
