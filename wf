@@ -1,24 +1,81 @@
 #!/bin/bash
 
+oneline_usage="wf [-on | -off | -d]"
+
 INTERFACE=$(networksetup -listallhardwareports | awk '$3=="Wi-Fi" {getline; print $2}')
 
 function toggle_wifi {
 	networksetup -setairportpower $INTERFACE $1;
 }
 
+ON="-on";
+OFF="-off";
+
+D1="-d";
+D2="--delay";
+D3="-delay"
+DELAY="$D1 | $D2 | $D3"
+
+H1="-h";
+H2="--help";
+H3="-help"
+HELP="$H1 | $H2 | $H3"
+
+function help {
+	cat <<-EndOptionsHelp
+		Usage: $oneline_usage
+
+		Options:
+		  $ON
+		      Turns WiFi on.
+		  $OFF
+		      Turns WiFi off.
+		  $DELAY [delay_length]
+		      Turns WiFi off, waits 'delay' seconds, then turns WiFi on.
+		      Default delay_length is 1 second.
+		  $HELP
+		      Displays script help.
+
+	EndOptionsHelp
+}
+
 if [ $# -eq 0 ]; then
 	toggle_wifi off;
-	echo "Wi-Fi reset.";
-	sleep 1;
+	echo "Wi-Fi reset";
 	toggle_wifi on;
+	exit 0
 fi
 case "$1" in
--off) toggle_wifi off;
+$OFF) toggle_wifi off;
 	echo "Wi-Fi off";
-	exit;
+	exit 0
 ;;
--on) toggle_wifi on;
+$ON) toggle_wifi on;
 	echo "Wi-Fi on";
-	exit;
+	exit 0
 ;;
+$D1 | $D2 | $D3) toggle_wifi off;
+	echo "Wi-Fi reset";
+	if [ -z $2 ];
+	then
+		sleep 1;
+	else
+		sleep $2;
+	fi
+	toggle_wifi on;
+	exit 0
+;;
+$H1 | $H2 | $H3)
+	if [ -t 1 ] ; then # STDOUT is a TTY
+        if which "${PAGER:-less}" >/dev/null 2>&1; then
+            # we have a working PAGER (or less as a default)
+            help | "${PAGER:-less}" && exit 0
+        fi
+    fi
+    help # just in case something failed above, we go ahead and just spew to STDOUT
+;;
+*) echo $oneline_usage;
+	exit 1
+;;
+
 esac
