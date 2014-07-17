@@ -2,18 +2,22 @@
 
 INTERFACE=$(networksetup -listallhardwareports | awk '$3=="Wi-Fi" {getline; print $2}')
 
+function toggle_wifi {
+	networksetup -setairportpower $INTERFACE $1;
+}
+
 if [ $# -eq 0 ]; then
-	networksetup -setairportpower $INTERFACE off;
+	toggle_wifi off;
 	echo "Wi-Fi reset.";
 	sleep 1;
-	networksetup -setairportpower $INTERFACE on;
+	toggle_wifi on;
 fi
 case "$1" in
--off) networksetup -setairportpower $INTERFACE off;
+-off) toggle_wifi off;
 	echo "Wi-Fi off";
 	exit;
 ;;
--on) networksetup -setairportpower $INTERFACE on;
+-on) toggle_wifi on;
 	echo "Wi-Fi on";
 	exit;
 ;;

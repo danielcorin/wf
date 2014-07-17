@@ -1,3 +1,3 @@
 wf
 ===
-Bash script to manage Airport Wi-Fi
+Bash utility to manage Airport Wi-Fi
