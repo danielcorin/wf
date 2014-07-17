@@ -1,6 +1,6 @@
 wf
 ===
-Bash utility to toggle Airport Wi-Fi. Provides quick interface for reseting wireless internet connection.
+Bash utility to toggle Airport Wi-Fi. Provides quick interface for resetting wireless internet connection.
 
 ##Usage
 `wf [-on | -off | -d | -h]`
