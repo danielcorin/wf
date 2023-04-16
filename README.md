@@ -2,10 +2,10 @@ wf
 ===
 Bash utility to toggle Airport Wi-Fi. Provides quick interface for resetting wireless internet connection.
 
-##Usage
+## Usage
 `wf [-on | -off | -d | -h]`
 
-##Examples
+## Examples
 Toggle WiFi (off, then on)
 
 	$ wf
@@ -21,7 +21,7 @@ Turn WiFi off
 	$wf -off
 	WiFi off
 	
-##Options
+## Options
 	  -on
 	      Turns Wi-Fi on.
 	  -off
@@ -33,7 +33,7 @@ Turn WiFi off
 	      Displays script help.
 	
 
-##License
+## License
 The MIT License (MIT)
 
 Copyright (c) 2014 Daniel Corin
@@ -57,7 +57,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-##Credits
+## Credits
 
 Pieces of code borrowed from
 
